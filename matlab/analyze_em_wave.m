@@ -5,14 +5,17 @@
 clear; clc;
 [file, folder] = uigetfile('*.csv', 'Select measurements.csv');
 if isequal(file, 0), return; end
-T = readtable(fullfile(folder, file), 'Encoding', 'UTF-8', 'TextType', 'string');
+opts = detectImportOptions(fullfile(folder, file), 'Encoding', 'UTF-8');
 required = ["group_id","group_name","level","unit","frequency_mhz", ...
     "measurement_date","environment","pair_id","instrument","location","floor","material"];
-assert(all(ismember(required, string(T.Properties.VariableNames))), ...
+assert(all(ismember(required, string(opts.VariableNames))), ...
     'Choose the original measurements CSV, not group_summary.csv.');
-assert(~isempty(T) && isnumeric(T.level) && all(isfinite(T.level)), 'No valid level data.');
 textCols = ["group_id","group_name","unit","measurement_date","environment", ...
     "pair_id","instrument","location","position","material"];
+opts = setvartype(opts, cellstr(textCols), 'string');
+opts = setvartype(opts, {'level','frequency_mhz','floor'}, 'double');
+T = readtable(fullfile(folder, file), opts);
+assert(~isempty(T) && isnumeric(T.level) && all(isfinite(T.level)), 'No valid level data.');
 for col = textCols
     T.(col) = string(T.(col));
     T.(col)(ismissing(T.(col))) = "";
