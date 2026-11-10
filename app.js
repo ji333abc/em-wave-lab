@@ -1,4 +1,4 @@
-import {SCHEMA_VERSION,UNITS,ENVIRONMENTS,createGroup,uid,localDate,parseLevels,statistics,penetration,COLUMNS,measurementRows,SUMMARY_COLUMNS,summaryRows,toCSV,validateBackup,mergeGroups} from './core.js';
+import {SCHEMA_VERSION,UNITS,ENVIRONMENTS,createGroup,uid,localDate,parseLevels,statistics,penetration,COLUMNS,measurementRows,SUMMARY_COLUMNS,summaryRows,toCSV,validateBackup,mergeGroups} from './core.js?v=1.1';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const STORAGE_KEY='em-wave-lab:v1';
 let model,loadError=false,editingId=null,toastTimer,activeTab='record',lastPersisted=null;
