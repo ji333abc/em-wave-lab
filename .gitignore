@@ -1,0 +1,10 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+measurements.csv
+group_summary.csv
+em-wave-lab-backup-*.json
+matlab_summary.csv
+matlab_penetration.csv
+
